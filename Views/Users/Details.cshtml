@@ -1,0 +1,64 @@
+﻿@using System.Data.SqlClient;
+@model Bank4.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+    int cards = 0, id = Model.ID;
+    try
+    {
+        string connectionString = "Data Source=localhost;Initial Catalog=Bank;Integrated Security=True";
+        using(SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            string sql = "SELECT ID FROM Card WHERE user_id=@user_id";
+            using(SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@user_id", id);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read()) cards++;
+                }
+            }
+            connection.Close();
+        }
+    }
+    catch(Exception ex)
+    {
+        
+    }
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User#@Model.ID</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            E-Mail
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">Number of cards</dt>
+        <dd class = "col-sm-10">
+            @cards
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
+    <a asp-action="Index">Back to USERS</a>
+</div>

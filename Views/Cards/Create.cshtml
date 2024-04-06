@@ -1,0 +1,71 @@
+﻿@model Bank4.Models.Card
+
+@{
+    ViewData["Title"] = "Create";
+
+    Random card_num_gen = new Random();
+    string card_number = "4048";
+    for (int i = 0; i < 3; i++) card_number += card_num_gen.Next(1, 10000).ToString().PadLeft(4, '0');
+
+    string url = Context.Request.Path;
+    string num = url.Substring(url.LastIndexOf('/') + 1);
+    int user_index = int.Parse(num);
+
+    DateTime date = DateTime.Today;
+    string exp_date = $"{date.Month.ToString().PadLeft(2, '0')}/{(date.Year % 100 + 4).ToString()}";
+
+    Random cvv_gen = new Random();
+    string CVV = cvv_gen.Next(1, 1000).ToString().PadLeft(3, '0');
+    
+    Random pin_gen = new Random();
+    string PINCODE = pin_gen.Next(1000).ToString().PadLeft(4, '0');
+}
+
+<h1>New</h1>
+
+<h4>Credit/Debit card</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label">Card number</label>
+                <input asp-for="Number" value=@card_number class="form-control">
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="user_id" class="control-label">User ID</label>
+                <input asp-for="user_id" value=@user_index class ="form-control">
+                <span asp-validation-for="user_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CVV" class="control-label"></label>
+                <input asp-for="CVV" value=@CVV class="form-control">
+                <span asp-validation-for="CVV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dateExpired" class="control-label">Expiration date</label>
+                <input asp-for="dateExpired" value=@exp_date class="form-control" />
+                <span asp-validation-for="dateExpired" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PIN" class="control-label">PIN - code</label>
+                <input asp-for="PIN" value=@PINCODE class="form-control" />
+                <span asp-validation-for="PIN" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div>
+    <a href="/Users/Index">Back to USERS</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

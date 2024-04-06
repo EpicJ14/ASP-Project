@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Bank4.Models.Card>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cards</h1>
+
+<p>
+    <a href="/Users/Index">Back to USERS</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Card number
+            </th>
+            <th>
+                User ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CVV)
+            </th>
+            <th>
+                Expiration date
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PIN)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CVV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateExpired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PIN)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Info</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                <a href="/Users/Details/@item.user_id">Owner</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

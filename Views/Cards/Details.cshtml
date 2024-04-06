@@ -1,0 +1,48 @@
+﻿@model Bank4.Models.Card
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Card#@Model.ID</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Card number
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class = "col-sm-2">
+            User ID
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CVV)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CVV)
+        </dd>
+        <dt class = "col-sm-2">
+            Expiration date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dateExpired)
+        </dd>
+        <dt class = "col-sm-2">
+            PIN - code
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PIN)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
+    <a asp-action="Index">Back to CARDS</a>
+</div>
