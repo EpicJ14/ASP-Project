@@ -7,7 +7,7 @@
     int cards = 0, id = Model.ID;  // Извежда броя карти на потребителя
     try
     {
-// Свързване с базата данни и извличане на всички карти, свързани с потребителя
+        // Свързване с базата данни и извличане на всички карти, свързани с потребителя
         string connectionString = "Data Source=localhost;Initial Catalog=Bank;Integrated Security=True";
         using(SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -24,10 +24,10 @@
             connection.Close();
         }
     }
-    catch(Exception ex)
+    catch(Exception ex) // При липса на връзка със сървъра връща невъзможна стойност 
     {
         cards = -1;
-    }
+    } // Администраторът ще знае, че има проблем
 }
 
 <h1>Details</h1>
