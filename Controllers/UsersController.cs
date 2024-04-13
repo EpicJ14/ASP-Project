@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
 using Bank4.Data;
 using Bank4.Models;
 
@@ -17,6 +18,26 @@ namespace Bank4.Controllers
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public void DeleteRelatedCards(int id) //този метод премахва всички карти, принадлежащи на потребителя, от базата данни
+        {
+            try
+            {
+                string connectionString = "Data Source=localhost;Initial Catalog=Bank;Integrated Security=True";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "DELETE FROM Card WHERE user_id=@user_id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@user_id", id);
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex) { }
         }
 
         // GET: Users
