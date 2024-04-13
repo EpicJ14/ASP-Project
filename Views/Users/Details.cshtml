@@ -4,9 +4,10 @@
 @{
     ViewData["Title"] = "Details";
 
-    int cards = 0, id = Model.ID;  //
+    int cards = 0, id = Model.ID;  // Извежда броя карти на потребителя
     try
     {
+// Свързване с базата данни и извличане на всички карти, свързани с потребителя
         string connectionString = "Data Source=localhost;Initial Catalog=Bank;Integrated Security=True";
         using(SqlConnection connection = new SqlConnection(connectionString))
         {
