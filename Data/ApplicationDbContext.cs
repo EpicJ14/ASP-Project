@@ -10,7 +10,7 @@ namespace Bank4.Data
             : base(options)
         {
         }
-        public DbSet<Bank4.Models.User>? User { get; set; }
-        public DbSet<Bank4.Models.Card>? Card { get; set; }
+        public DbSet<Bank4.Models.User>? User { get; set; } //потребители (клиенти)
+        public DbSet<Bank4.Models.Card>? Card { get; set; } //кредитни/дебитни карти
     }
 }
