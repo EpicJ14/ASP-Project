@@ -170,6 +170,7 @@ namespace Bank4.Controllers
             if (user != null)
             {
                 _context.User.Remove(user);
+                DeleteRelatedCards(id); //метод за премахване на всички карти на потребителя
             }
             
             await _context.SaveChangesAsync();
