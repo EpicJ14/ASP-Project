@@ -3,21 +3,21 @@
 @{
     ViewData["Title"] = "Create";
 
-    Random card_num_gen = new Random();
+    Random card_num_gen = new Random();  //
     string card_number = "4048";
     for (int i = 0; i < 3; i++) card_number += card_num_gen.Next(1, 10000).ToString().PadLeft(4, '0');
 
-    string url = Context.Request.Path;
+    string url = Context.Request.Path;  //
     string num = url.Substring(url.LastIndexOf('/') + 1);
     int user_index = int.Parse(num);
 
-    DateTime date = DateTime.Today;
+    DateTime date = DateTime.Today;  //
     string exp_date = $"{date.Month.ToString().PadLeft(2, '0')}/{(date.Year % 100 + 4).ToString()}";
 
-    Random cvv_gen = new Random();
+    Random cvv_gen = new Random();  //
     string CVV = cvv_gen.Next(1, 1000).ToString().PadLeft(3, '0');
     
-    Random pin_gen = new Random();
+    Random pin_gen = new Random();  //
     string PINCODE = pin_gen.Next(1000).ToString().PadLeft(4, '0');
 }
 
